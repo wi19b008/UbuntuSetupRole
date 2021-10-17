@@ -1,0 +1,6 @@
+---
+# vars file for ubuntu_setup
+#
+#
+pyenv_users:
+        - github

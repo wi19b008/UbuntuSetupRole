@@ -1,0 +1,43 @@
+---
+# Dieses Skript setzt einen Ubuntu Host auf, laut Uebung in Cloud Computing
+#
+#
+#
+vars:
+ssh_port: '22'
+roles:
+  - role: comcast.sdkman
+        sdkman_user: github
+        sdkman_group: github
+        sdkman_auto_answer: true
+        sdkman_udpate: true
+        become: true
+    - role: grzegorznowak.nvm_node
+        become: true
+    - role: gantsign.pyenv
+        pyenv_users:
+        - github
+    - role: giner.tfenv
+pre_tasks:
+  - name: Add group github to system
+        group:
+        name: github
+        state: present
+        become: true
+  - name: Add user github to system
+        user:
+                name: github
+                groups: github
+                shell: /bin/bash
+                state: present
+                password: '{{ ''sicherespasswrod'' | password_hash(''sha512'') }}'
+                home: /home/github
+        become: true
+  - name: Create Directory for github User
+        file:
+                path: /home/github/actions-runner
+                state: directory
+                owner: github
+                group: github
+                mode: 509
+                become: true

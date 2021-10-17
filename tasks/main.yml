@@ -1,0 +1,38 @@
+---    
+- name: Group github
+  group:
+        name: github
+        state: present
+
+- name: User github
+  user:
+        name: github
+        groups: github
+        shell: /bin/bash
+        state: present
+        password: "{{ 'sicherespasswort' | password_hash('sha512') }}"
+        home: /home/github
+    
+- name: Homedir github User
+  file:
+        path: /home/github/actions-runner
+        state: directory
+        owner: github
+        group: github
+        mode: 0775
+
+- name: Install nvm
+  include_role:
+        name: grzegorznowak.nvm_node
+
+- name: Install Sdkman
+  include_role:
+        name: comcast.sdkman
+
+- name: Install tfenv
+  include_role:
+        name: giner.tfenv
+
+- name: Install Pyenv
+  include_role:
+        name: gantsign.pyenv

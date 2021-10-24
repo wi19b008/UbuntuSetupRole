@@ -1,0 +1,5 @@
+---
+- role: grzegorznowak.nvm_node
+- role: comcast.sdkman
+- role: giner.tfenv
+- role: gantsign.pyenv

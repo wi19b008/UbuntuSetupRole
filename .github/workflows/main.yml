@@ -14,8 +14,4 @@ jobs:
       - uses: gofrolist/molecule-action@v2
         with:
           molecule_options: --debug --base-config molecule/_shared/base.yml
-          molecule_command: converge
-      - uses: gofrolist/molecule-action@v2
-        with:
-          molecule_options: --debug --base-config molecule/_shared/base.yml
-          molecule_command: verify
+          molecule_command: converge, verify

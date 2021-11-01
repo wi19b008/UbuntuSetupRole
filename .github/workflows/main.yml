@@ -2,7 +2,7 @@ name: Ansible Molecule
 on: 
   push:
     branches: 
-      - master  
+      - main 
 
 jobs:
   molecule:

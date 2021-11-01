@@ -12,3 +12,11 @@ jobs:
         with:
           path: "${{ github.repository }}"
       - uses: gofrolist/molecule-action@v2
+        with:
+          molecule_options: --debug --base-config molecule/_shared/base.yml
+          molecule_command: |
+            Commands:
+              converge
+          molecule_args: |
+            Arguments:
+              --driver-name docker

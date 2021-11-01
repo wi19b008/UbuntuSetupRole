@@ -10,12 +10,6 @@
     package_facts:
         manager: auto
 
-  - name: Check whether a package called foobar is installed
-    debug:
-        msg: "{{ ansible_facts.packages['zip'] | length }}
-        versions of foobar are installed!"
-    when: "'zip' in ansible_facts.packages"
-
   - name: Get available groups
     getent:
         database: group
@@ -49,3 +43,35 @@
   - debug:
         msg: "Actions-runner Directory for user github exists."
     when: stat_result_runner.stat.exists
+
+  - name: Check if nvm is installed
+    stat:
+        path: /var/lib/nvm/nvm-exec
+    register: stat_result_nvm
+  - debug:
+        msg: "nvm is installed."
+    when: stat_result_nvm.stat.exists
+
+  - name: Check if pyenv is installed
+    stat:
+        path: /home/github/.pyenv/bin/pyenv
+    register: stat_result_pyenv
+  - debug:
+        msg: "pyenv is installed."
+    when: stat_result_pyenv.stat.exists
+
+  - name: Check if tfenv is installed
+    stat:
+        path: /root/bin/tfenv
+    register: stat_result_tfenv
+  - debug:
+        msg: "tfenv is installed."
+    when: stat_result_tfenv.stat.exists
+
+  - name: Check if sdkman is installed
+    stat:
+        path: /root/.sdkman/bin/sdkman-init.sh
+    register: stat_result_sdkman
+  - debug:
+        msg: "sdkman is installed."
+    when: stat_result_sdkman.stat.exists

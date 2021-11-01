@@ -1,10 +1,52 @@
 ---
-# This is an example playbook to execute Ansible tests.
-
 - name: Verify
   hosts: all
-  gather_facts: false
+  gather_facts: true
   tasks:
-  - name: Example assertion
-    assert:
-      that: true
+  - name: Verify ubuntu_setup
+    include_role:
+        name: "ubuntu_setup"
+
+  - name: Gather package facts
+    package_facts:
+        manager: auto
+
+  - name: Check whether a package called foobar is installed
+    debug:
+        msg: "{{ ansible_facts.packages['zip'] | length }}
+        versions of foobar are installed!"
+    when: "'zip' in ansible_facts.packages"
+
+  - name: Get available groups
+    getent:
+        database: group
+
+  - name: Check for group github
+    debug:
+        msg: "Group github exists."
+    when: "'github' in ansible_facts.getent_group"
+
+  - getent:
+        database: passwd
+        key: github
+  - name: Get users/Check for user github
+    debug:
+        msg: "User github exists."
+    when: "'github' in ansible_facts.getent_passwd"
+
+  - name: Check home directory for github user exists
+    stat:
+        path: /home/github
+    register: stat_result
+  - debug:
+        msg: "Home Directory for user github exists."
+    when: stat_result.stat.exists
+
+
+  - name: Check actions-runner directory for github user exists
+    stat:
+        path: /home/github/actions-runner
+    register: stat_result_runner
+  - debug:
+        msg: "Actions-runner Directory for user github exists."
+    when: stat_result_runner.stat.exists

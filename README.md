@@ -1,4 +1,4 @@
-[![Ansible Molecule](https://github.com/wi19b008/UbuntuSetupRole/actions/workflows/main.yml/badge.svg?branch=main&event=push)](https://github.com/wi19b008/UbuntuSetupRole/actions/workflows/main.yml)
+[![Ansible Molecule](https://github.com/wi19b008/UbuntuSetupRole/actions/workflows/main.yml/badge.svg)](https://github.com/wi19b008/UbuntuSetupRole/actions/workflows/main.yml)
 
 Role
 ------------

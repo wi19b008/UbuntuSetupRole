@@ -3,7 +3,7 @@
   hosts: all
   gather_facts: true
   tasks:
-   - name: Verify ubuntu_setup
+  - name: Verify ubuntu_setup
     include_role:
         name: "ubuntu_setup"
   - name: Gather package facts

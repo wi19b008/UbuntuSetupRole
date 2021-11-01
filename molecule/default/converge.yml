@@ -1,7 +1,3 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: "Include ubuntu_setup"
-      include_role:
-        name: "ubuntu_setup"

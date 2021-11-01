@@ -22,6 +22,5 @@ test_sequence:
         - syntax
         - create
         - converge
-#        - idempotence
         - verify
         - destroy

@@ -5,11 +5,13 @@ on:
       - main 
 
 jobs:
-  build:
+  molecule:
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4
     steps:
-      - name: Test with molecule
-        run: |
-          molecule converge && molecule verify
+      - uses: actions/checkout@v2
+        with:
+          path: "${{ github.repository }}"
+      - uses: gofrolist/molecule-action@v2
+        with:
+          molecule_options: --debug --base-config molecule/_shared/base.yml
+          molecule_command: converge
